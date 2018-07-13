@@ -27,12 +27,12 @@ class MessengerController < ApplicationController
   def analysis(sender, text)
     #message = Message.where(:recieved => text).first
     message = "Hola"
-    if message
-      reply = message.reply
-    else
-      reply = "Sorry not found"
-    end
-    send_message(sender,reply)
+    #if message
+    #  reply = message.reply
+    #else
+    #  reply = "Sorry not found"
+    #end
+    send_message(sender, message)
   end
 
   def send_message(sender, text)
