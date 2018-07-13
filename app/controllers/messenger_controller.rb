@@ -101,7 +101,20 @@ class MessengerController < ApplicationController
                           {
                             "title": "listar",
                             "type": "postback",
-                            "payload": "Listar"
+                            "payload": {
+                              "template_type": "list",
+                              "top_element_style": "compact",
+                              "elements": [
+                                {
+                                  "title": "Classic White T-Shirt",
+                                  "subtitle": "See all our colors"
+                                },
+                                {
+                                  "title": "Classic White T-Shirt 2",
+                                  "subtitle": "See all our colors"
+                                }
+                              ]  
+                            }
                           }
                         ]  
                       }
