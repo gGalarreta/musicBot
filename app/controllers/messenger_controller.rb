@@ -8,7 +8,7 @@ class MessengerController < ApplicationController
 
   def search
     p "ESTOY EN EL SEARCH"
-    send_message("1860488127349564", "ESTAS BUSCANDO")
+    send_message2("1860488127349564", "ESTAS BUSCANDO")
 =begin
     therequest = request.body.read
     p therequest
