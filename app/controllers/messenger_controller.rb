@@ -8,12 +8,14 @@ class MessengerController < ApplicationController
 
   def search
     p "ESTOY EN EL SEARCH"
+=begin
     therequest = request.body.read
     p therequest
     data = JSON.parse(therequest)
     message = "BUSCANDO"
     parse_data2(data, message)
     render "recieved_data"
+=end
   end
 
   def favorites
