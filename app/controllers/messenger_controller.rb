@@ -36,7 +36,29 @@ class MessengerController < ApplicationController
   end
 
   def send_message(sender, text)
-    myjson = {"recipient": {"id": "#{sender}"},"message": { "attachment": {type: "template", payload: { template_type: "button", text: "OK, let's set your room preferences so I won't need to ask for them in the future.", buttons: [{ type: "web_url", url: "https://intense-lake-18448.herokuapp.com/messenger/index", title: "Set preferences", webview_height_ratio: "compact", messenger_extensions: false }]}}}}
+    myjson = {"recipient": {"id": "#{sender}"},
+                "message": {
+                    "attachment": {
+                      "type": "template",
+                      "payload": {
+                        "template_type": "list",
+                        "top_element_style": "compact",
+                        "elements": [
+                          {
+                            "title": "Classic White T-Shirt",
+                            "subtitle": "See all our colors",
+                            "default_action": {
+                              "type": "web_url",
+                              "url": "https://intense-lake-18448.herokuapp.com/messenger/index",
+                              "messenger_extensions": false,
+                              "webview_height_ratio": "tall"
+                            }
+                          }
+                        ]  
+                      }
+                    }
+                  }
+                }
     puts HTTP.post(url, json: myjson)
   end
 
