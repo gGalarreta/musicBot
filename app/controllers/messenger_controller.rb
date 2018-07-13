@@ -8,6 +8,7 @@ class MessengerController < ApplicationController
 
   def search
     p "ESTOY EN EL SEARCH"
+    send_message("1860488127349564", "ESTAS BUSCANDO")
 =begin
     therequest = request.body.read
     p therequest
@@ -99,9 +100,7 @@ class MessengerController < ApplicationController
                                             {
                                               "title": "buscar",
                                               "type": "web_url",
-                                              "url": "https://intense-lake-18448.herokuapp.com/messenger/search",
-                                              "messenger_extensions": false,
-                                              "webview_height_ratio": "tall"
+                                              "url": "https://intense-lake-18448.herokuapp.com/messenger/search"
                                             }
                                           ]
                           },
@@ -112,9 +111,7 @@ class MessengerController < ApplicationController
                                             {
                                               "title": "listar",
                                               "type": "web_url",
-                                              "url": "https://intense-lake-18448.herokuapp.com/messenger/favorites",
-                                              "messenger_extensions": false,
-                                              "webview_height_ratio": "tall"
+                                              "url": "https://intense-lake-18448.herokuapp.com/messenger/favorites"
                                             }
                                           ]
                           }
