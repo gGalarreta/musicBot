@@ -9,6 +9,7 @@ class MessengerController < ApplicationController
   def search
     p "ESTOY EN EL SEARCH"
     send_message2("1860488127349564", "ESTAS BUSCANDO")
+    render :json => "hola"
 =begin
     therequest = request.body.read
     p therequest
@@ -32,7 +33,6 @@ class MessengerController < ApplicationController
     p therequest
     data = JSON.parse(therequest)
     parse_data(data)
-    render "recieved_data"
   end
 
  def parse_data(data)

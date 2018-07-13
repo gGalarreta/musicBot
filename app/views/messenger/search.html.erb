@@ -22,7 +22,7 @@
                 MessengerExtensions.getContext('459470744518715',
                     function success(thread_context) {
                         // success
-                        document.getElementById("psid").value = thread_context.psid;
+                        //document.getElementById("psid").value = thread_context.psid;
                     },
                     function error(err) {
                         // error
@@ -36,10 +36,5 @@
         });
     };
 </script>
-<form action="/optionspostback" method="get">
-    <input type="hidden" name="psid" id="psid">
-    <h3>Pillows</h3>
-    <input type="text" name="pillows" value="hard">Hard<br>
-</form>
 </body>
 </html>
