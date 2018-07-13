@@ -14,7 +14,6 @@ class MessengerController < ApplicationController
     data = JSON.parse(therequest)
     message = "BUSCANDO"
     parse_data2(data, message)
-    render "recieved_data"
 =end
   end
 
@@ -25,7 +24,6 @@ class MessengerController < ApplicationController
     data = JSON.parse(therequest)
     message = "LISTANDO"
     parse_data2(data)
-    render "recieved_data"
   end
 
   def recieved_data
