@@ -8,10 +8,20 @@ class MessengerController < ApplicationController
 
   def search
     p "ESTOY EN EL SEARCH"
+    therequest = request.body.read
+    data = JSON.parse(therequest)
+    message = "BUSCANDO"
+    parse_data2(data, message)
+    render "recieved_data"
   end
 
   def favorites
     p "ESTOY EN FAVORITOS"
+    therequest = request.body.read
+    data = JSON.parse(therequest)
+    message = "LISTANDO"
+    parse_data2(data)
+    render "recieved_data"
   end
 
   def recieved_data
@@ -43,6 +53,33 @@ class MessengerController < ApplicationController
     send_message(sender, message)
   end
 
+ def parse_data2(data, message)
+    enteries = data["entry"]
+    enteries.each do |entry|
+      entry["messaging"].each do |messaging|
+        sender = messaging["sender"]["id"]
+        text = messaging["message"]["text"]
+        analysis(sender, message)
+      end
+    end
+  end
+
+  def analysis2(sender, text)
+    #message = Message.where(:recieved => text).first
+    message = text
+    #if message
+    #  reply = message.reply
+    #else
+    #  reply = "Sorry not found"
+    #end
+    send_message2(sender, message)
+  end
+
+  def send_message2(sender, text)
+    myjson = {"recipient": {"id": "#{sender}"},"message": {"text": "#{text}"}}
+    puts HTTP.post(url, json: myjson)
+  end
+
   def send_message(sender, text)
     myjson = {"recipient": {"id": "#{sender}"},
                 "message": {
@@ -59,7 +96,7 @@ class MessengerController < ApplicationController
                                             {
                                               "title": "buscar",
                                               "type": "web_url",
-                                              "url": "https://intense-lake-18448.herokuapp.com/messenger/index",
+                                              "url": "https://intense-lake-18448.herokuapp.com/messenger/search",
                                               "messenger_extensions": false,
                                               "webview_height_ratio": "tall"
                                             }
@@ -72,7 +109,7 @@ class MessengerController < ApplicationController
                                             {
                                               "title": "listar",
                                               "type": "web_url",
-                                              "url": "https://intense-lake-18448.herokuapp.com/messenger/index",
+                                              "url": "https://intense-lake-18448.herokuapp.com/messenger/favorites",
                                               "messenger_extensions": false,
                                               "webview_height_ratio": "tall"
                                             }
