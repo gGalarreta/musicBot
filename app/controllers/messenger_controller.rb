@@ -90,29 +90,18 @@ class MessengerController < ApplicationController
                     "attachment": {
                       "type": "template",
                       "payload": {
-                        "template_type": "list",
-                        "top_element_style": "compact",
-                        "elements": [
+                        "template_type": "button",
+                        "text":"What do you want to do next?",
+                        "buttons": [
                           {
-                            "title": "Buscar Canciones",
-                            "subtitle": "Escribe el nombre de tu cancion",
-                                        "buttons": [
-                                            {
-                                              "title": "buscar",
-                                              "url": "https://intense-lake-18448.herokuapp.com/messenger/search"
-                                            }
-                                          ]
+                            "title": "buscar",
+                            "type": "web_url",
+                            "url": "https://intense-lake-18448.herokuapp.com/messenger/search"
                           },
                           {
-                            "title": "Favoritos",
-                            "subtitle": "Visualiza tus canciones favoritas",
-                                          "buttons": [
-                                            {
-                                              "title": "listar",
-                                              "type": "web_url",
-                                              "url": "https://intense-lake-18448.herokuapp.com/messenger/favorites"
-                                            }
-                                          ]
+                            "title": "listar",
+                            "type": "web_url",
+                            "url": "https://intense-lake-18448.herokuapp.com/messenger/favorites"
                           }
                         ]  
                       }
