@@ -100,7 +100,7 @@ class MessengerController < ApplicationController
                           },
                           {
                             "title": "listar",
-                            "type": "web_url",
+                            "type": "postback",
                             "payload": "Listar"
                           }
                         ]  
