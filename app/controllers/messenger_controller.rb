@@ -53,12 +53,30 @@ class MessengerController < ApplicationController
                         "top_element_style": "compact",
                         "elements": [
                           {
-                            "title": "Classic White T-Shirt",
-                            "subtitle": "See all our colors"
+                            "title": "Buscar Canciones",
+                            "subtitle": "Escribe el nombre de tu cancion",
+                                        "buttons": [
+                                            {
+                                              "title": "buscar",
+                                              "type": "web_url",
+                                              "url": "https://intense-lake-18448.herokuapp.com/messenger/index",
+                                              "messenger_extensions": true,
+                                              "webview_height_ratio": "tall"
+                                            }
+                                          ]
                           },
                           {
-                            "title": "Classic White T-Shirt 2",
-                            "subtitle": "See all our colors"
+                            "title": "Favoritos",
+                            "subtitle": "Visualiza tus canciones favoritas",
+                                          "buttons": [
+                                            {
+                                              "title": "listar",
+                                              "type": "web_url",
+                                              "url": "https://intense-lake-18448.herokuapp.com/messenger/index",
+                                              "messenger_extensions": true,
+                                              "webview_height_ratio": "tall"
+                                            }
+                                          ]
                           }
                         ]  
                       }
