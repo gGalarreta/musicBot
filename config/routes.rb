@@ -4,8 +4,8 @@ Rails.application.routes.draw do
 
   get 'messenger/index'
   post '/' => 'messenger#recieved_data' 
-  get 'messenger/search'
-  get 'messenger/favorites'
+  post 'messenger/search'
+  post 'messenger/favorites'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
