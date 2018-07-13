@@ -46,13 +46,11 @@ class MessengerController < ApplicationController
                         "elements": [
                           {
                             "title": "Classic White T-Shirt",
-                            "subtitle": "See all our colors",
-                            "default_action": {
-                              "type": "web_url",
-                              "url": "https://intense-lake-18448.herokuapp.com/messenger/index",
-                              "messenger_extensions": false,
-                              "webview_height_ratio": "tall"
-                            }
+                            "subtitle": "See all our colors"
+                          },
+                          {
+                            "title": "Classic White T-Shirt 2",
+                            "subtitle": "See all our colors"
                           }
                         ]  
                       }
