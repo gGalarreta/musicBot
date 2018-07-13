@@ -60,7 +60,7 @@ class MessengerController < ApplicationController
                                               "title": "buscar",
                                               "type": "web_url",
                                               "url": "https://intense-lake-18448.herokuapp.com/messenger/index",
-                                              "messenger_extensions": true,
+                                              "messenger_extensions": false,
                                               "webview_height_ratio": "tall"
                                             }
                                           ]
@@ -73,7 +73,7 @@ class MessengerController < ApplicationController
                                               "title": "listar",
                                               "type": "web_url",
                                               "url": "https://intense-lake-18448.herokuapp.com/messenger/index",
-                                              "messenger_extensions": true,
+                                              "messenger_extensions": false,
                                               "webview_height_ratio": "tall"
                                             }
                                           ]
