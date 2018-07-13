@@ -95,13 +95,13 @@ class MessengerController < ApplicationController
                         "buttons": [
                           {
                             "title": "buscar",
-                            "type": "web_url",
-                            "url": "https://intense-lake-18448.herokuapp.com/messenger/search"
+                            "type": "postback",
+                            "payload": "BUSCAR"
                           },
                           {
                             "title": "listar",
                             "type": "web_url",
-                            "url": "https://intense-lake-18448.herokuapp.com"
+                            "payload": "Listar"
                           }
                         ]  
                       }
