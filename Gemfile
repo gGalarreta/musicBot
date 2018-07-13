@@ -29,6 +29,8 @@ gem 'pg', '~> 1.0'
 #Great Ruby dubugging companion: pretty print Ruby objects to visualize their structure. Supports custom object formatting via plugins
 gem 'awesome_print', '~> 1.8'
 
+#An easy-to-use client library for making requests from Ruby.
+gem 'http', '~> 3.3'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
