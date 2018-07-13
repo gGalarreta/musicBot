@@ -101,7 +101,7 @@ class MessengerController < ApplicationController
                           {
                             "title": "listar",
                             "type": "web_url",
-                            "url": "https://intense-lake-18448.herokuapp.com/messenger/favorites"
+                            "url": "https://www.messenger.com"
                           }
                         ]  
                       }
