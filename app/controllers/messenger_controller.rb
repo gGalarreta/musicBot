@@ -6,6 +6,14 @@ class MessengerController < ApplicationController
     end
   end
 
+  def search
+    p "ESTOY EN EL SEARCH"
+  end
+
+  def favorites
+    p "ESTOY EN FAVORITOS"
+  end
+
   def recieved_data
     therequest = request.body.read
     data = JSON.parse(therequest)
@@ -46,11 +54,29 @@ class MessengerController < ApplicationController
                         "elements": [
                           {
                             "title": "Classic White T-Shirt",
-                            "subtitle": "See all our colors"
+                            "subtitle": "See all our colors",
+                                        "buttons": [
+                                            {
+                                              "title": "View",
+                                              "type": "web_url",
+                                              "url": "https://intense-lake-18448.herokuapp.com/messenger/search",
+                                              "messenger_extensions": true,
+                                              "webview_height_ratio": "tall"
+                                            }
+                                          ]
                           },
                           {
                             "title": "Classic White T-Shirt 2",
-                            "subtitle": "See all our colors"
+                            "subtitle": "See all our colors",
+                                          "buttons": [
+                                            {
+                                              "title": "View",
+                                              "type": "web_url",
+                                              "url": "https://intense-lake-18448.herokuapp.com/messenger/favorites",
+                                              "messenger_extensions": true,
+                                              "webview_height_ratio": "tall"
+                                            }
+                                          ]
                           }
                         ]  
                       }
