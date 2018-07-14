@@ -31,8 +31,8 @@ class MessengerController < ApplicationController
       payload = payload["payload"]
       if payload == ChatService::SEARCH_PAYLOAD
         chat_service.send_search_question(sender)
-      elsif if payload == ChatService::MUSIC_LIST_PAYLOAD
-        #chat_service.send_list if payload == ChatService::MUSIC_LIST_PAYLOAD
+      elsif payload == ChatService::MUSIC_LIST_PAYLOAD
+        #chat_service.send_list
         p "hola"
       else
         chat_service.send_menu(sender)
