@@ -7,6 +7,7 @@ class ChatService
   SEARCH_QUESTION = "Escribe la palabra 'cancion:' seguido del titulo de la cancion' "
   MUSIC_LIST_TITLE = "Ver favoritas"
   MUSIC_LIST_PAYLOAD = "listar"
+  EMPTY_LIST = "No se encontro resultado"
 
 
   def initialize()
@@ -48,7 +49,12 @@ class ChatService
     track = text.downcase.gsub(QUESTION_MARKER, "").lstrip
     music_match_provider = MusicMatch.new()
     matched_tracks = music_match_provider.search_track_by_name track
-    send_list(sender, matched_tracks)
+    matched_tracks.empty? ? send_empty_list_message(sender) : send_list(sender, matched_tracks)
+  end
+
+  def send_empty_list_message sender
+    json_response = {"recipient": {"id": "#{sender}"},"message": {"text": "#{EMPTY_LIST}"}}
+    HTTP.post(url, json: json_response)
   end
 
   def send_list sender, tracks_list
@@ -63,15 +69,15 @@ class ChatService
                     "elements": [
                       {
                         "title": tracks_list.first.track_name,
-                        "subtitle": tracks_list.first.artist_name
+                        "subtitle": handle_track_data(tracks_list.first)
                       },
                       {
                         "title": tracks_list.second.track_name,
-                        "subtitle": tracks_list.second.artist_name
+                        "subtitle": handle_track_data(tracks_list.second)
                       },
                       {
                         "title": tracks_list.third.track_name,
-                        "subtitle": tracks_list.third.artist_name   
+                        "subtitle": handle_track_data(tracks_list.third) 
                       }
                     ] 
                   }
@@ -84,6 +90,11 @@ class ChatService
 
   def url
     "https://graph.facebook.com/v2.6/me/messages?access_token=#{ENV['FB_CHAT_KEY']}"
+  end
+
+  def handle_track_data track
+    "artista: #{track.artist_name}\n
+     album: #{track.album_name}\n"
   end
 
 end
