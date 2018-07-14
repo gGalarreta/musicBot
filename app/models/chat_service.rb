@@ -13,7 +13,7 @@ class ChatService
   DISLIKE_MUSIC_TITLE = "Ya no me gusta"
   WELCOME_TEXT = "Bienvenido, deseas comenzar tu \n experiencia musical"
   WELCOME_OK = "bienvenido"
-  WELCOME_NEGATE = "vuelve pronto"
+  WELCOME_NEGATE = "Tal ves despues"
 
 
   def initialize( user )
