@@ -15,11 +15,11 @@ class ChatService
   end
 
   def send_search_question
-    send_text_response(sender, SEARCH_QUESTION)
+    send_text_response(@sender, SEARCH_QUESTION)
   end
 
   def send_empty_list_message
-    send_text_response(sender, EMPTY_LIST)
+    send_text_response(@sender, EMPTY_LIST)
   end
 
   def url
@@ -31,7 +31,7 @@ class ChatService
      album: #{track.album_name}\n"
   end
 
-  def send_text_response text
+  def send_text_response sender, text
     json_response = {"recipient": {"id": "#{sender}"},"message": {"text": "#{text}"}}
     HTTP.post(url, json: json_response)
   end
@@ -45,7 +45,7 @@ class ChatService
 
   def send_list tracks_list
     #because we need a good view, we only show random 3 songs
-    json_response = {"recipient": {"id": "#{sender}"},
+    json_response = {"recipient": {"id": "#{@sender}"},
               "message": {
                 "attachment": {
                   "type": "template",
@@ -74,7 +74,7 @@ class ChatService
   end
 
   def send_menu 
-    json_response = {"recipient": {"id": "#{sender}"},
+    json_response = {"recipient": {"id": "#{@sender}"},
             "message": {
                 "attachment": {
                   "type": "template",
