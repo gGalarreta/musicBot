@@ -18,7 +18,7 @@ class MessengerController < ApplicationController
     enteries.each do |entry|
       entry["messaging"].each do |messaging|
         sender = messaging["sender"]["id"]
-        text = messaging["message"]["text"]
+        text = messaging["message"]
         payload = messaging["postback"]
         analysis(sender, text, payload)
       end
@@ -32,6 +32,7 @@ class MessengerController < ApplicationController
       chat_service.send_search_question(sender) if payload == ChatService::SEARCH_PAYLOAD
       #chat_service.send_list if payload == ChatService::MUSIC_LIST_PAYLOAD
     else
+      text = text["text"]
       if text.downcase.include? ChatService::QUESTION_MARKER
         chat_service.search_tracks(sender, text)
       else
