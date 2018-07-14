@@ -76,7 +76,7 @@ class ChatService
       p "-----------------"
       json_response[:message][:attachment][:payload][:elements].push(element)
       p "-----------------"
-      p json_responsed
+      p json_response
     end
 =begin
     json_response = {"recipient": {"id": "#{@sender}"},
