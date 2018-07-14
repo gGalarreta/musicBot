@@ -34,7 +34,8 @@ class MessengerController < ApplicationController
       if text.downcase.include? ChatService::QUESTION_MARKER
         chat_service.search_tracks(sender, text)
       else
-      chat_service.send_menu(sender)
+        chat_service.send_menu(sender)
+      end
     end    
   end
 
