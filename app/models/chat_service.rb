@@ -163,7 +163,7 @@ class ChatService
                   "buttons": [
                     {
                       "type": "account_link",
-                      "url": ENV['SERVER_URL'] + new_session_path
+                      "url": ENV['SERVER_URL'] + "/session/new"
                     }                    
                   ]  
                 }
