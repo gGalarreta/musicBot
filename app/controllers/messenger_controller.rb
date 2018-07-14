@@ -26,23 +26,23 @@ class MessengerController < ApplicationController
   end
 
   def analysis sender, text, payload
-    chat_service = ChatService.new()
+    chat_service = ChatService.new(sender)
     if payload
       payload = payload["payload"]
       if payload == ChatService::SEARCH_PAYLOAD
-        chat_service.send_search_question(sender)
+        chat_service.send_search_question()
       elsif payload == ChatService::MUSIC_LIST_PAYLOAD
         #chat_service.send_list
         p "hola"
       else
-        chat_service.send_menu(sender)
+        chat_service.send_menu()
       end
     else
       text = text["text"]
       if text.downcase.include? ChatService::QUESTION_MARKER
-        chat_service.search_tracks(sender, text)
+        chat_service.search_tracks(text)
       else
-        chat_service.send_menu(sender)
+        chat_service.send_menu()
       end
     end    
   end
