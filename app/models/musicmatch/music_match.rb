@@ -6,7 +6,7 @@ class MusicMatch
     set_key
   end
 
-  def search_by_name( track_name )
+  def search_track_by_name( track_name )
     response = MusixMatch.search_track(:q_track => track_name)
     tracks = []
     if response.status_code == 200
