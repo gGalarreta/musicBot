@@ -34,12 +34,14 @@ class MessengerController < ApplicationController
         chat_service.send_search_question()
       elsif postback == ChatService::MUSIC_LIST_PAYLOAD
         chat_service.send_favorite_tracks()
-      elsif postback == ChatService::WELCOME_OK
+      elsif postback == ChatService::WELCOME_OK || postback == ChatService::MENU_MARKER
         chat_service.send_menu()
       else
         postback_title = payload["title"]
         if postback_title == ChatService::LIKE_MUSIC_TITLE
           current_user.add_favorite_track(postback)
+        elsif postback_title == ChatService::DISLIKE_MUSIC_TITLE
+          current_user.remove_favorite_track(postback)
         else
           ## default message
           chat_service.send_menu()

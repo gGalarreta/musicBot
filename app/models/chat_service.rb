@@ -10,10 +10,11 @@ class ChatService
   SEARCH_EMPTY_LIST = "No se encontro resultado"
   FAVORITE_EMPTY_LIST = "No tienes canciones favoritas"
   LIKE_MUSIC_TITLE = "Me gusta"
-  DISLIKE_MUSIC_TITLE = "Ya no me gusta"
+  DISLIKE_MUSIC_TITLE = "Remover"
   WELCOME_TEXT = "Bienvenido, deseas comenzar tu \n experiencia musical"
   WELCOME_OK = "bienvenido"
   WELCOME_NEGATE = "Tal ves despues"
+  MENU_MARKER =" MENU"
 
 
   def initialize( user )
@@ -92,7 +93,15 @@ class ChatService
                           "payload": "#{tracks_list.third.to_hash.to_json}"
                         ]
                       }
-                    ] 
+                    ],
+                    ,
+                     "buttons": [
+                      {
+                        "title": "Volver al Menu",
+                        "type": "postback",
+                        "payload": "#{MENU_MARKER}"            
+                      }
+                    ]  
                   }
                 }
               }
