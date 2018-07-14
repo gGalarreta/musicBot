@@ -9,8 +9,8 @@ class ChatService
   MUSIC_LIST_PAYLOAD = "listar"
   SEARCH_EMPTY_LIST = "No se encontro resultado"
   FAVORITE_EMPTY_LIST = "No tienes canciones favoritas"
-  FAVORITE_MUSIC_TITLE = "Me gusta"
-  NO_FAVORITE_MUSIC_TITLE = "Ya no me gusta"
+  LIKE_MUSIC_TITLE = "Me gusta"
+  DISLIKE_MUSIC_TITLE = "Ya no me gusta"
 
 
   def initialize( sender )
@@ -43,13 +43,13 @@ class ChatService
     track = text.downcase.gsub(QUESTION_MARKER, "").lstrip
     music_match_provider = MusicMatch.new()
     matched_tracks = music_match_provider.search_track_by_name track
-    matched_tracks.empty? ? send_empty_list_message(SEARCH_EMPTY_LIST) : send_list(matched_tracks, FAVORITE_MUSIC_TITLE)
+    matched_tracks.empty? ? send_empty_list_message(SEARCH_EMPTY_LIST) : send_list(matched_tracks, LIKE_MUSIC_TITLE)
   end
 
   def send_favorite_tracks
     user = User.first
     favorite_tracks = user.favorite_tracks
-    favorite_tracks.empty? ? send_empty_list_message(FAVORITE_EMPTY_LIST) : send_list(favorite_tracks, NO_FAVORITE_MUSIC_TITLE)
+    favorite_tracks.empty? ? send_empty_list_message(FAVORITE_EMPTY_LIST) : send_list(favorite_tracks, DISLIKE_MUSIC_TITLE)
   end
 
   def send_list tracks_list, button_title
