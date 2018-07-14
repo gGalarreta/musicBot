@@ -5,7 +5,7 @@ class MessengerController < ApplicationController
       render :json => params["hub.challenge"]
     end
   end
-e
+
   def recieved_data
     chat_request = request.body.read
     data = JSON.parse(chat_request)
