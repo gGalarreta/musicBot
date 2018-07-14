@@ -9,6 +9,9 @@ class MessengerController < ApplicationController
 
   def recieved_data
     chat_request = request.body.read
+    p "---------------------------"
+    p chat_request
+    p "---------------------------"
     data = JSON.parse(chat_request)
     parse_data(data)
   end
@@ -25,13 +28,4 @@ class MessengerController < ApplicationController
     end
   end
 
-
-  #def send_message2(sender, text)
-  #  myjson = {"recipient": {"id": "#{sender}"},"message": {"text": "#{text}"}}
-  #  puts HTTP.post(url, json: myjson)
-  #end
-
-
 end
-
-
