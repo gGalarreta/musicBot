@@ -8,6 +8,8 @@ class ChatService
   MUSIC_LIST_TITLE = "Ver favoritas"
   MUSIC_LIST_PAYLOAD = "listar"
   EMPTY_LIST = "No se encontro resultado"
+  FAVORITE_MUSIC_TITLE = "Me gusta"
+  NO_FAVORITE_MUSIC_TITLE = "Ya no me gusta"
 
 
   def initialize( sender )
@@ -40,10 +42,10 @@ class ChatService
     track = text.downcase.gsub(QUESTION_MARKER, "").lstrip
     music_match_provider = MusicMatch.new()
     matched_tracks = music_match_provider.search_track_by_name track
-    matched_tracks.empty? ? send_empty_list_message() : send_list(matched_tracks)
+    matched_tracks.empty? ? send_empty_list_message() : send_list(matched_tracks, FAVORITE_MUSIC_TITLE)
   end
 
-  def send_list tracks_list
+  def send_list tracks_list, button_title
     #because we need a good view, we only show random 3 songs
     json_response = {"recipient": {"id": "#{@sender}"},
               "message": {
@@ -55,15 +57,30 @@ class ChatService
                     "elements": [
                       {
                         "title": tracks_list.first.track_name,
-                        "subtitle": handle_track_data(tracks_list.first)
+                        "subtitle": handle_track_data(tracks_list.first),
+                        "buttons":[
+                          title: button_title,
+                          "type": "postback",
+                          "payload": tracks_list.first.track_name
+                        ]
                       },
                       {
                         "title": tracks_list.second.track_name,
-                        "subtitle": handle_track_data(tracks_list.second)
+                        "subtitle": handle_track_data(tracks_list.second),
+                        "buttons":[
+                          title: button_title,
+                          "type": "postback",
+                          "payload": tracks_list.second.track_name
+                        ]
                       },
                       {
                         "title": tracks_list.third.track_name,
-                        "subtitle": handle_track_data(tracks_list.third) 
+                        "subtitle": handle_track_data(tracks_list.third),
+                        "buttons":[
+                          title: button_title,
+                          "type": "postback",
+                          "payload": tracks_list.third.track_name
+                        ]
                       }
                     ] 
                   }
