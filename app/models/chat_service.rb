@@ -7,7 +7,8 @@ class ChatService
   SEARCH_QUESTION = "Escribe la palabra 'cancion:' seguido del titulo de la cancion' "
   MUSIC_LIST_TITLE = "Ver favoritas"
   MUSIC_LIST_PAYLOAD = "listar"
-  EMPTY_LIST = "No se encontro resultado"
+  SEARCH_EMPTY_LIST = "No se encontro resultado"
+  FAVORITE_EMPTY_LIST = "No tienes canciones favoritas"
   FAVORITE_MUSIC_TITLE = "Me gusta"
   NO_FAVORITE_MUSIC_TITLE = "Ya no me gusta"
 
@@ -20,8 +21,8 @@ class ChatService
     send_text_response(@sender, SEARCH_QUESTION)
   end
 
-  def send_empty_list_message
-    send_text_response(@sender, EMPTY_LIST)
+  def send_empty_list_message text
+    send_text_response(@sender, text)
   end
 
   def url
@@ -42,7 +43,13 @@ class ChatService
     track = text.downcase.gsub(QUESTION_MARKER, "").lstrip
     music_match_provider = MusicMatch.new()
     matched_tracks = music_match_provider.search_track_by_name track
-    matched_tracks.empty? ? send_empty_list_message() : send_list(matched_tracks, FAVORITE_MUSIC_TITLE)
+    matched_tracks.empty? ? send_empty_list_message(SEARCH_EMPTY_LIST) : send_list(matched_tracks, FAVORITE_MUSIC_TITLE)
+  end
+
+  def send_favorite_tracks
+    user = User.first
+    favorite_tracks = user.favorite_tracks
+    favorite_tracks.empty? ? send_empty_list_message(FAVORITE_EMPTY_LIST) : send_list(favorite_tracks, NO_FAVORITE_MUSIC_TITLE)
   end
 
   def send_list tracks_list, button_title
@@ -61,7 +68,7 @@ class ChatService
                         "buttons":[
                           "title": "#{button_title}",
                           "type": "postback",
-                          "payload": "#{tracks_list.first.track_name}"
+                          "payload": "#{tracks_list.first.to_hash}"
                         ]
                       },
                       {
@@ -70,7 +77,7 @@ class ChatService
                         "buttons":[
                           "title": "#{button_title}",
                           "type": "postback",
-                          "payload": "#{tracks_list.second.track_name}"
+                          "payload": "#{tracks_list.second.to_hash}"
                         ]
                       },
                       {
@@ -79,7 +86,7 @@ class ChatService
                         "buttons":[
                           "title": "#{button_title}",
                           "type": "postback",
-                          "payload": "#{tracks_list.third.track_name}"
+                          "payload": "#{tracks_list.third.to_hash}"
                         ]
                       }
                     ] 

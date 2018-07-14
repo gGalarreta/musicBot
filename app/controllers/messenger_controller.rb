@@ -27,17 +27,18 @@ class MessengerController < ApplicationController
 
   def analysis sender, text, payload
     chat_service = ChatService.new(sender)
+
     if payload
       postback = payload["payload"]
       if postback == ChatService::SEARCH_PAYLOAD
         chat_service.send_search_question()
       elsif postback == ChatService::MUSIC_LIST_PAYLOAD
-        #chat_service.send_list
-        p "hola"
+        chat_service.send_favorite_tracks()
       else
         postback_title = payload["title"]
         if postback_title == ChatService::FAVORITE_MUSIC_TITLE
-          p "hola"
+          # falta manejar el user
+          User.first.add_favorite_track(payload)
         else
           chat_service.send_menu()
         end
