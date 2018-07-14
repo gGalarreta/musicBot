@@ -1,11 +1,11 @@
 class ChatService
 
   MENU_TEXT = "Cuentanos que deseas hacer"
-  SEARCH_TITLE = "Deseas buscar canciones?"
+  SEARCH_TITLE = "Buscar canciones"
   SEARCH_PAYLOAD = "buscar"
   QUESTION_MARKER = "cancion:"
   SEARCH_QUESTION = "Escribe la palabra 'cancion:' seguido del titulo de la cancion' "
-  MUSIC_LIST_TITLE = "Deseas listar tus canciones favoritas?"
+  MUSIC_LIST_TITLE = "Ver favoritas"
   MUSIC_LIST_PAYLOAD = "listar"
 
 
