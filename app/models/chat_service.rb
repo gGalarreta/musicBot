@@ -71,7 +71,7 @@ class ChatService
                         "buttons":[
                           "title": "#{button_title}",
                           "type": "postback",
-                          "payload": "#{tracks_list.first.to_hash}"
+                          "payload": "#{tracks_list.first.to_hash.to_json}"
                         ]
                       },
                       {
@@ -80,7 +80,7 @@ class ChatService
                         "buttons":[
                           "title": "#{button_title}",
                           "type": "postback",
-                          "payload": "#{tracks_list.second.to_hash}"
+                          "payload": "#{tracks_list.second.to_hash.to_json}"
                         ]
                       },
                       {
@@ -89,7 +89,7 @@ class ChatService
                         "buttons":[
                           "title": "#{button_title}",
                           "type": "postback",
-                          "payload": "#{tracks_list.third.to_hash}"
+                          "payload": "#{tracks_list.third.to_hash.to_json}"
                         ]
                       }
                     ] 

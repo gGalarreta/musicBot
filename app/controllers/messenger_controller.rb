@@ -39,6 +39,8 @@ class MessengerController < ApplicationController
       else
         postback_title = payload["title"]
         if postback_title == ChatService::LIKE_MUSIC_TITLE
+          p "---------------------"
+          p postback
           current_user.add_favorite_track(postback)
         else
           ## default message
