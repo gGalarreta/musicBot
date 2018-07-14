@@ -34,10 +34,13 @@ class MessengerController < ApplicationController
       elsif postback == ChatService::MUSIC_LIST_PAYLOAD
         #chat_service.send_list
         p "hola"
-      elsif postback == ChatService::FAVORITE_MUSIC_TITLE
-        p "hola"
       else
-        chat_service.send_menu()
+        postback_title = payload["title"]
+        if postback_title == ChatService::FAVORITE_MUSIC_TITLE
+          p "hola"
+        else
+          chat_service.send_menu()
+        end
       end
     else
       text = text["text"]
