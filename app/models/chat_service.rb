@@ -51,7 +51,7 @@ class ChatService
     send_list(matched_tracks)
   end
 
-  def send_list tracks_list
+  def send_list sender, tracks_list
     #because we need a good view, we only show random 3 songs
     json_response = {"recipient": {"id": "#{sender}"},
               "message": {
