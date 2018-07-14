@@ -17,12 +17,9 @@ class MessengerController < ApplicationController
     enteries = data["entry"]
     enteries.each do |entry|
       entry["messaging"].each do |messaging|
-        p "--------------------------"
-        p messaging
-        p "--------------------------"
         sender = messaging["sender"]["id"]
         text = messaging["message"]["text"]
-        payload = messaging["payload"]
+        payload = messaging["postback"]["payload"]
         analysis(sender, text, payload)
       end
     end
