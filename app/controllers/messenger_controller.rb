@@ -20,12 +20,12 @@ class MessengerController < ApplicationController
         sender = messaging["sender"]["id"]
         text = messaging["message"]["text"]
         payload = messaging["payload"]
-        analysis(text, payload)
+        analysis(sender, text, payload)
       end
     end
   end
 
-  def analysis text, payload
+  def analysis sender, text, payload
     chat_service = ChatService.new()
     if payload
       chat_service.send_search if payload == "buscar"
