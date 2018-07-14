@@ -11,10 +11,13 @@ class ChatService
   FAVORITE_EMPTY_LIST = "No tienes canciones favoritas"
   LIKE_MUSIC_TITLE = "Me gusta"
   DISLIKE_MUSIC_TITLE = "Ya no me gusta"
+  WELCOME_TEXT = "Bienvenido, deseas comenzar tu \n experiencia musical"
+  WELCOME_OK = "bienvenido"
+  WELCOME_NEGATE = "vuelve pronto"
 
 
-  def initialize( sender )
-    @sender = sender
+  def initialize( user )
+    @sender = user.fb_id
   end
 
   def send_search_question
@@ -122,6 +125,33 @@ class ChatService
               }
             }
     HTTP.post(url, json: json_response)
+  end
+
+  def send_welcome
+     json_response = {"recipient": {"id": "#{@sender}"},
+            "message": {
+                "attachment": {
+                  "type": "template",
+                  "payload": {
+                    "template_type": "button",
+                    "text": "#{WELCOME_TEXT}",
+                    "buttons": [
+                      {
+                        "title": "#{WELCOME_OK}",
+                        "type": "postback",
+                        "payload": "#{WELCOME_OK}"
+                      },
+                      {
+                        "title": "#{WELCOME_NEGATE}",
+                        "type": "postback",
+                        "payload": "#{WELCOME_NEGATE}"
+                      }
+                    ]  
+                  }
+                }
+              }
+            }
+    HTTP.post(url, json: json_response)   
   end
 
 end

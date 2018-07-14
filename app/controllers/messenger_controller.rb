@@ -5,8 +5,7 @@ class MessengerController < ApplicationController
       render :json => params["hub.challenge"]
     end
   end
-
-
+e
   def recieved_data
     chat_request = request.body.read
     data = JSON.parse(chat_request)
@@ -26,20 +25,23 @@ class MessengerController < ApplicationController
   end
 
   def analysis sender, text, payload
-    chat_service = ChatService.new(sender)
-
+    auth = Auth.new(sender)
+    current_user = auth.current_user()
+    chat_service = ChatService.new(current_user)
     if payload
       postback = payload["payload"]
       if postback == ChatService::SEARCH_PAYLOAD
         chat_service.send_search_question()
       elsif postback == ChatService::MUSIC_LIST_PAYLOAD
         chat_service.send_favorite_tracks()
+      elsif postback == ChatService::WELCOME_OK
+        chat_service.send_menu()
       else
         postback_title = payload["title"]
         if postback_title == ChatService::FAVORITE_MUSIC_TITLE
-          # falta manejar el user
-          User.first.add_favorite_track(payload)
+          current_user.add_favorite_track(payload)
         else
+          ## default message
           chat_service.send_menu()
         end
       end
@@ -48,9 +50,11 @@ class MessengerController < ApplicationController
       if text.downcase.include? ChatService::QUESTION_MARKER
         chat_service.search_tracks(text)
       else
-        chat_service.send_menu()
+        ##init message
+        chat_service.send_welcome()
       end
     end    
   end
+
 
 end
