@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2018_07_14_040114) do
   enable_extension "plpgsql"
 
   create_table "favorite_tracks", force: :cascade do |t|
-    t.integer "track_id"
+    t.string "track_id"
     t.string "track_name"
     t.string "artist_name"
     t.string "album_name"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2018_07_14_040114) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer "fb_id"
+    t.string "fb_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
