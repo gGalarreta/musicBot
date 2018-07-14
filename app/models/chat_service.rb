@@ -2,9 +2,9 @@ class ChatService
 
   MENU_TEXT = "Cuentanos que deseas hacer"
   SEARCH_TITLE = "Deseas buscar canciones?"
-  SEARCH_PAYLOAD = "BUSCAR"
+  SEARCH_PAYLOAD = "buscar"
   MUSIC_LIST_TITLE = "Deseas listar tus canciones favoritas?"
-  MUSIC_LIST_PAYLOAD = "LISTAR"
+  MUSIC_LIST_PAYLOAD = "listar"
 
 
   def initialize()
@@ -35,6 +35,14 @@ class ChatService
               }
             }
     HTTP.post(url, json: json_response)
+  end
+
+  def send_list
+    
+  end
+
+  def send_search
+    
   end
 
   def url
