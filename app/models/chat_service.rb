@@ -59,7 +59,7 @@ class ChatService
                         "title": tracks_list.first.track_name,
                         "subtitle": handle_track_data(tracks_list.first),
                         "buttons":[
-                          title: button_title,
+                          "title": button_title,
                           "type": "postback",
                           "payload": tracks_list.first.track_name
                         ]
@@ -68,7 +68,7 @@ class ChatService
                         "title": tracks_list.second.track_name,
                         "subtitle": handle_track_data(tracks_list.second),
                         "buttons":[
-                          title: button_title,
+                          "title": button_title,
                           "type": "postback",
                           "payload": tracks_list.second.track_name
                         ]
@@ -77,7 +77,7 @@ class ChatService
                         "title": tracks_list.third.track_name,
                         "subtitle": handle_track_data(tracks_list.third),
                         "buttons":[
-                          title: button_title,
+                          "title": button_title,
                           "type": "postback",
                           "payload": tracks_list.third.track_name
                         ]
