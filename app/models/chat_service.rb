@@ -58,6 +58,20 @@ class ChatService
 
   def send_list tracks_list, button_title
     #because we need a good view, we only show random 3 songs
+    json_response = list_default
+    tracks_list.first(3).each do |track|
+      element = {
+                "title": track.track_name,
+                "subtitle": handle_track_data(track),
+                "buttons":[
+                  "title": "#{button_title}",
+                  "type": "postback",
+                  "payload": "#{track.to_hash.to_json}"
+                  ]
+                }
+      json_response[:payload][:elements].push(element)
+    end
+=begin
     json_response = {"recipient": {"id": "#{@sender}"},
               "message": {
                 "attachment": {
@@ -105,6 +119,7 @@ class ChatService
                 }
               }
             }
+=end
     HTTP.post(url, json: json_response)
   end
 
@@ -160,6 +175,29 @@ class ChatService
               }
             }
     HTTP.post(url, json: json_response)   
+  end
+
+  def list_default
+     json_response = {"recipient": {"id": "#{@sender}"},
+              "message": {
+                "attachment": {
+                  "type": "template",
+                  "payload": {
+                    "template_type": "list",
+                    "top_element_style": "compact",
+                    "elements": [],
+                     "buttons": [
+                      {
+                        "title": "Volver al Menu",
+                        "type": "postback",
+                        "payload": "#{MENU_MARKER}"            
+                      }
+                    ]  
+                  }
+                }
+              }
+            }
+      json_response 
   end
 
 end
