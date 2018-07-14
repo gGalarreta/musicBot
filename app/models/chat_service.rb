@@ -38,7 +38,7 @@ class ChatService
   end
 
   def url
-    "https://graph.facebook.com/v2.6/me/messages?access_token=#{ENV.fetch(FB_CHAT_KEY)}"
+    "https://graph.facebook.com/v2.6/me/messages?access_token=#{ENV['FB_CHAT_KEY']}"
   end
 
 end

@@ -1,7 +1,7 @@
 class MessengerController < ApplicationController
 
   def index
-    if params["hub.verify_token"] == ENV.fetch(WEBHOOK_TOKEN)
+    if params["hub.verify_token"] == ENV['WEBHOOK_TOKEN']
       render :json => params["hub.challenge"]
     end
   end

@@ -25,7 +25,7 @@ class MusicMatch
   private 
 
   def set_key
-    MusixMatch::API::Base.api_key = ENV.fetch('MUSICXMATCH_KEY')
+    MusixMatch::API::Base.api_key = ENV['MUSICXMATCH_KEY']
   end
 
 
