@@ -53,7 +53,8 @@ class MessengerController < ApplicationController
         chat_service.search_tracks(text)
       else
         ##init message
-        chat_service.send_welcome()
+        #chat_service.send_welcome()
+        chat_service.send_log_in()
       end
     end    
   end

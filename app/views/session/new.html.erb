@@ -1,0 +1,6 @@
+Login to your account
+<%= form_for @user, url: session_index_path, method: :post do |f| %>
+  <%= f.email_field :email, placeholder:"E-mail address" %>
+  <%= f.password_field :password, placeholder: "Password" %>
+  <%= f.submit "Log in" %>
+<% end %>

@@ -59,8 +59,6 @@ class ChatService
   def send_list tracks_list, button_title
     #because we need a good view, we only show random 3 songs
     json_response = get_default_list
-    p "-----------------"
-    p json_response
     tracks_list.first(3).each do |track|
       element = {
                 "title": track.track_name,
@@ -71,62 +69,8 @@ class ChatService
                   "payload": "#{track.to_hash.to_json}"
                   ]
                 }
-      p "-----------------"
-      p element
-      p "-----------------"
       json_response[:message][:attachment][:payload][:elements].push(element)
-      p "-----------------"
-      p json_response
     end
-=begin
-    json_response = {"recipient": {"id": "#{@sender}"},
-              "message": {
-                "attachment": {
-                  "type": "template",
-                  "payload": {
-                    "template_type": "list",
-                    "top_element_style": "compact",
-                    "elements": [
-                      {
-                        "title": tracks_list.first.track_name,
-                        "subtitle": handle_track_data(tracks_list.first),
-                        "buttons":[
-                          "title": "#{button_title}",
-                          "type": "postback",
-                          "payload": "#{tracks_list.first.to_hash.to_json}"
-                        ]
-                      },
-                      {
-                        "title": tracks_list.second.track_name,
-                        "subtitle": handle_track_data(tracks_list.second),
-                        "buttons":[
-                          "title": "#{button_title}",
-                          "type": "postback",
-                          "payload": "#{tracks_list.second.to_hash.to_json}"
-                        ]
-                      },
-                      {
-                        "title": tracks_list.third.track_name,
-                        "subtitle": handle_track_data(tracks_list.third),
-                        "buttons":[
-                          "title": "#{button_title}",
-                          "type": "postback",
-                          "payload": "#{tracks_list.third.to_hash.to_json}"
-                        ]
-                      }
-                    ],
-                     "buttons": [
-                      {
-                        "title": "Volver al Menu",
-                        "type": "postback",
-                        "payload": "#{MENU_MARKER}"            
-                      }
-                    ]  
-                  }
-                }
-              }
-            }
-=end
     HTTP.post(url, json: json_response)
   end
 
@@ -205,6 +149,28 @@ class ChatService
               }
             }
       json_response 
+  end
+
+
+  def send_log_in
+   json_response = {"recipient": {"id": "#{@sender}"},
+          "message": {
+              "attachment": {
+                "type": "template",
+                "payload": {
+                  "template_type": "button",
+                  "text": "Log In",
+                  "buttons": [
+                    {
+                      "type": "account_link",
+                      "url": ENV['SERVER_URL'] + new_session_path
+                    }                    
+                  ]  
+                }
+              }
+            }
+          }
+  HTTP.post(url, json: json_response)  
   end
 
 end
