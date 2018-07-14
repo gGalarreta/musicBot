@@ -10,7 +10,7 @@ class ChatService
   def initialize()
   end
 
-  def send_menu( sender )
+  def send_menu sender 
     json_response = {"recipient": {"id": "#{sender}"},
             "message": {
                 "attachment": {

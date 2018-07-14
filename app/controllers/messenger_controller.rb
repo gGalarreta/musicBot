@@ -1,7 +1,7 @@
 class MessengerController < ApplicationController
 
   def index
-    if params["hub.verify_token"] == "Z4Q-L7t"
+    if params["hub.verify_token"] == ENV.fetch(WEBHOOK_TOKEN)
       render :json => params["hub.challenge"]
     end
   end
@@ -20,7 +20,7 @@ class MessengerController < ApplicationController
       entry["messaging"].each do |messaging|
         sender = messaging["sender"]["id"]
         #text = messaging["message"]["text"]
-        chat_service.set_menu(sender)
+        chat_service.send_menu(sender)
       end
     end
   end
