@@ -30,7 +30,7 @@ class MessengerController < ApplicationController
     if payload
       payload = payload["payload"]
       chat_service.send_search_question(sender) if payload == ChatService::SEARCH_PAYLOAD
-      chat_service.send_list if payload == ChatService::MUSIC_LIST_PAYLOAD
+      #chat_service.send_list if payload == ChatService::MUSIC_LIST_PAYLOAD
     else
       if text.downcase.include? ChatService::QUESTION_MARKER
         chat_service.search_tracks(sender, text)
