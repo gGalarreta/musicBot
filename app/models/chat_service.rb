@@ -94,7 +94,6 @@ class ChatService
                         ]
                       }
                     ],
-                    ,
                      "buttons": [
                       {
                         "title": "Volver al Menu",
