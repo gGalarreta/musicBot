@@ -32,6 +32,13 @@ gem 'awesome_print', '~> 1.8'
 #An easy-to-use client library for making requests from Ruby.
 gem 'http', '~> 3.3'
 
+#API wrapper for musixmatch.com API's
+gem 'musix_match', '~> 0.2.0'
+
+
+#Simple, Heroku-friendly Rails app configuration using ENV and a single YAML file
+gem 'figaro'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
