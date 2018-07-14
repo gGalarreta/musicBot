@@ -48,7 +48,7 @@ class ChatService
     track = text.downcase.gsub(QUESTION_MARKER, "").lstrip
     music_match_provider = MusicMatch.new()
     matched_tracks = music_match_provider.search_track_by_name track
-    send_list(matched_tracks)
+    send_list(sender, matched_tracks)
   end
 
   def send_list sender, tracks_list
