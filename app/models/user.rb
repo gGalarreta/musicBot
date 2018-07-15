@@ -23,10 +23,7 @@ class User < ApplicationRecord
 
 
   def add_searched_tracks track_list
-    track_list.each do |track|
-      p "------------------------"
-      p track
-      p "------------------------"
+    track_list.first(3).each do |track|
       save if searched_tracks.build(track.to_hash)
     end
   end

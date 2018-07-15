@@ -31,15 +31,6 @@ class ChatService
     send_text_response(@sender, text)
   end
 
-  def url
-    "https://graph.facebook.com/v2.6/me/messages?access_token=#{ENV['FB_CHAT_KEY']}"
-  end
-
-  def handle_track_data track
-    "artista: #{track.artist_name}\n
-     album: #{track.album_name}\n"
-  end
-
   def send_text_response sender, text
     json_response = {"recipient": {"id": "#{sender}"},"message": {"text": "#{text}"}}
     HTTP.post(url, json: json_response)
@@ -49,7 +40,7 @@ class ChatService
     track = text.downcase.gsub(QUESTION_MARKER, "").lstrip
     music_match_provider = MusicMatch.new()
     matched_tracks = music_match_provider.search_track_by_name track
-    #save_searched_tracks(matched_tracks)
+    save_searched_tracks(matched_tracks)
     matched_tracks.empty? ? send_empty_list_message(SEARCH_EMPTY_LIST) : send_list(matched_tracks, LIKE_MUSIC_TITLE)
   end
 
@@ -182,9 +173,19 @@ class ChatService
   HTTP.post(url, json: json_response)  
   end
 
-  def save_searched_tracks track_list
-    @current_user.add_searched_tracks(track_list)
-  end
+  private
 
+    def save_searched_tracks track_list
+      @current_user.add_searched_tracks(track_list)
+    end
+
+    def url
+      "https://graph.facebook.com/v2.6/me/messages?access_token=#{ENV['FB_CHAT_KEY']}"
+    end
+
+    def handle_track_data track
+      "artista: #{track.artist_name}\n
+       album: #{track.album_name}\n"
+    end
 
 end
