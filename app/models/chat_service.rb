@@ -49,7 +49,7 @@ class ChatService
     track = text.downcase.gsub(QUESTION_MARKER, "").lstrip
     music_match_provider = MusicMatch.new()
     matched_tracks = music_match_provider.search_track_by_name track.first(3)
-    save_searched_tracks(matched_tracks)
+    #save_searched_tracks(matched_tracks)
     matched_tracks.empty? ? send_empty_list_message(SEARCH_EMPTY_LIST) : send_list(matched_tracks, LIKE_MUSIC_TITLE)
   end
 
