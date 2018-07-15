@@ -3,8 +3,8 @@ class Report
   MONTHS = ["january","february","march","april","may","june","july","august","september","october","november","december"]
   USER_OPTION = "usuarios"
   CHAT_OPTION = "chats"
-  SONG_OPTION = "canciones"
-  SEARCH_OPTION = "busquedas"
+  SONG_OPTION = "canciones populares por favoritos"
+  SEARCH_OPTION = "canciones populares por busquedas"
 
   def initialize()
   end
@@ -30,9 +30,9 @@ class Report
       when CHAT_OPTION
         @results = generate_report_struct(Conversation.all, start_report_frequency, finalt_report_frequency)
       when SONG_OPTION
-        @results = generate_report_struct(User.all, start_report_frequency, finalt_report_frequency)
+        @results = generate_generic_struct(FavoriteTrack.all, "track_name")
       else
-        @results = generate_report_struct(SearchedTrack.all, start_report_frequency, finalt_report_frequency)
+        @results = generate_generic_struct(SearchedTrack.all, "track_name")
       end
     end
   end
@@ -51,6 +51,15 @@ class Report
         current_month = Time.new(current_year, index+1, 1)
         elements = data.where("created_at > ? AND created_at < ?", current_month.beginning_of_month, current_month.end_of_month)
         current_value = [MONTHS[index], elements.size]
+        values.push(current_value)
+      end
+      values
+    end
+
+    def generate_generic_struct data, label
+      values = []
+      data.group(label).count.each do |k, v|
+        current_value = [k, v]
         values.push(current_value)
       end
       values
