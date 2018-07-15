@@ -182,11 +182,9 @@ class ChatService
   HTTP.post(url, json: json_response)  
   end
 
-  private
-
-    def save_searched_tracks track_list
-      @current_user.add_searched_tracks(track_list)
-    end
+  def save_searched_tracks track_list
+    @current_user.add_searched_tracks(track_list)
+  end
 
 
 end
