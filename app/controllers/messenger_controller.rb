@@ -62,7 +62,7 @@ class MessengerController < ApplicationController
       end    
     end
 
-    def save_conversations current_user, text, payload
+    def save_conversations current_user, sender, text, payload
       current_user.add_conversation(sender, text, payload)
     end
 
