@@ -97,7 +97,7 @@ class ChatService
                       {
                         "title": "#{REPORT_TEXT}",
                         "type": "web_url",
-                        "url": ENV['SERVER_URL'] + "/reports/index",
+                        "url": ENV['SERVER_URL'] + "/reports",
                         "webview_height_ratio": "full"
                       }
                     ]  
