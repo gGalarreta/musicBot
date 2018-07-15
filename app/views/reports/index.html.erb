@@ -8,7 +8,7 @@
             <%= label_tag "Tipos de reporte: " %>
             <%= select_tag "report_type", options_for_select(@report.options, @report.options.first), :onchange => "change_report_type(this.options[this.selectedIndex].value);" %>
             </div>
-            <div class="months-filter">
+            <div class="months-filter" id="months-options">
                 <div class="month">
                     <%= label_tag "Mes inicial: " %>
                     <div class="select-data">
@@ -41,6 +41,13 @@
 
     var final_frequency_element = document.getElementById("final_month");
     var final_report_frequency = final_frequency_element.options[final_frequency_element.selectedIndex].value;
+
+    if (report_type === "<%= Report::SONG_OPTION %>"){
+        document.getElementById("months-options").style.display="none";
+    } else{
+        document.getElementById("months-options").style.display="";
+    }
+
     $.ajax({
         type: 'GET',
         url: '/reports/generate',
