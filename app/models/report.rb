@@ -26,13 +26,13 @@ class Report
     if valid_params?(report_type, start_report_frequency)
       case report_type
       when USER_OPTION
-        generate_report_struct(User.all, start_report_frequency, finalt_report_frequency)
+        @results = generate_report_struct(User.all, start_report_frequency, finalt_report_frequency)
       when CHAT_OPTION
-        generate_report_struct(User.all, start_report_frequency, finalt_report_frequency)
+        @results = generate_report_struct(User.all, start_report_frequency, finalt_report_frequency)
       when SONG_OPTION
-        generate_report_struct(User.all, start_report_frequency, finalt_report_frequency)
+        @results = generate_report_struct(User.all, start_report_frequency, finalt_report_frequency)
       else
-        generate_report_struct(User.all, start_report_frequency, finalt_report_frequency)
+        @results = generate_report_struct(User.all, start_report_frequency, finalt_report_frequency)
       end
     end
   end
