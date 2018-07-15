@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_14_192407) do
+ActiveRecord::Schema.define(version: 2018_07_15_222355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "conversations", force: :cascade do |t|
+    t.string "sender"
+    t.string "recipient"
+    t.string "text"
+    t.string "payload"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_conversations_on_user_id"
+  end
 
   create_table "favorite_tracks", force: :cascade do |t|
     t.string "track_id"
@@ -25,6 +36,18 @@ ActiveRecord::Schema.define(version: 2018_07_14_192407) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_favorite_tracks_on_user_id"
+  end
+
+  create_table "searched_tracks", force: :cascade do |t|
+    t.string "track_id"
+    t.string "track_name"
+    t.string "artist_name"
+    t.string "album_name"
+    t.string "album_coverart"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_searched_tracks_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

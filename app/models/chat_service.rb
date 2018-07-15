@@ -19,6 +19,7 @@ class ChatService
 
 
   def initialize( user )
+    @current_user = user
     @sender = user.fb_id
   end
 
@@ -47,20 +48,21 @@ class ChatService
   def search_tracks text
     track = text.downcase.gsub(QUESTION_MARKER, "").lstrip
     music_match_provider = MusicMatch.new()
-    matched_tracks = music_match_provider.search_track_by_name track
+    matched_tracks = music_match_provider.search_track_by_name track.first(3)
+    save_searched_tracks(matched_tracks)
     matched_tracks.empty? ? send_empty_list_message(SEARCH_EMPTY_LIST) : send_list(matched_tracks, LIKE_MUSIC_TITLE)
   end
 
   def send_favorite_tracks
     user = User.first
-    favorite_tracks = user.favorite_tracks
+    favorite_tracks = user.favorite_tracks.first(3)
     favorite_tracks.empty? ? send_empty_list_message(FAVORITE_EMPTY_LIST) : send_list(favorite_tracks, DISLIKE_MUSIC_TITLE)
   end
 
   def send_list tracks_list, button_title
     #because we need a good view, we only show random 3 songs
     json_response = get_default_list
-    tracks_list.first(3).each do |track|
+    tracks_list.each do |track|
       element = {
                 "title": track.track_name,
                 "subtitle": handle_track_data(track),
@@ -179,6 +181,12 @@ class ChatService
           }
   HTTP.post(url, json: json_response)  
   end
+
+  private
+
+    def save_searched_tracks track_list
+      @current_user.add_searched_tracks(track_list)
+    end
 
 
 end

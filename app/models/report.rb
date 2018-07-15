@@ -28,11 +28,11 @@ class Report
       when USER_OPTION
         @results = generate_report_struct(User.all, start_report_frequency, finalt_report_frequency)
       when CHAT_OPTION
-        @results = generate_report_struct(User.all, start_report_frequency, finalt_report_frequency)
+        @results = generate_report_struct(Conversation.all, start_report_frequency, finalt_report_frequency)
       when SONG_OPTION
         @results = generate_report_struct(User.all, start_report_frequency, finalt_report_frequency)
       else
-        @results = generate_report_struct(User.all, start_report_frequency, finalt_report_frequency)
+        @results = generate_report_struct(SearchedTrack.all, start_report_frequency, finalt_report_frequency)
       end
     end
   end
