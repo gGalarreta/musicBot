@@ -15,6 +15,7 @@ class ChatService
   WELCOME_OK = "bienvenido"
   WELCOME_NEGATE = "Tal ves despues"
   MENU_MARKER =" MENU"
+  REPORT_TEXT = "Ver reportes"
 
 
   def initialize( user )
@@ -92,6 +93,12 @@ class ChatService
                         "title": "#{MUSIC_LIST_TITLE}",
                         "type": "postback",
                         "payload": "#{MUSIC_LIST_PAYLOAD}"
+                      },
+                      {
+                        "title": "#{REPORT_TEXT}",
+                        "type": "web_url",
+                        "url": ENV['SERVER_URL'] + "/reports/index",
+                        "webview_height_ratio": "full"
                       }
                     ]  
                   }
@@ -172,5 +179,6 @@ class ChatService
           }
   HTTP.post(url, json: json_response)  
   end
+
 
 end

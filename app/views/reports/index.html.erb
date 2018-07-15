@@ -1,0 +1,41 @@
+<h1>Choose your preferences</h1>
+<%= form_tag ('/reports') do %>
+
+    <div>    
+        <div>
+        <%= label_tag "Tipos de reporte" %>
+        <%= select_tag "report_type", options_for_select(@report.options, @report.options.first), :onchange => "change_report_type(this.options[this.selectedIndex].value);" %>
+        </div>
+
+        <div>
+        <%= label_tag "Mes inicial" %>
+        <%= select_tag "initial_month", options_for_select(@report.frequencies, @report.frequencies.first) %>
+        <%= label_tag "Mes Final" %>
+        <%= select_tag "final_month", options_for_select(@report.frequencies, @report.frequencies.last) %>
+        </div>
+    </div>
+
+    <%= render :partial => 'reports/report', :locals => {:results => @results} %>
+
+<% end %>
+
+<script type="text/javascript">
+
+  function change_report_type(report_state)
+ {
+    var report_type = report_state;
+    var start_frequency_element = document.getElementById("initial_month");
+    var final_frequency_element = document.getElementById("final_month");
+    var start_report_frequency = start_frequency_element.options[start_frequency_element.selectedIndex].value;
+    var final_report_frequency = final_frequency_element.options[final_frequency_element.selectedIndex].value;
+    $.ajax({
+        type: 'GET',
+        url: '/reports/generate',
+        data: {"report_type" : report_type, "start_report_frequency": start_report_frequency, "final_report_frequency": final_report_frequency},
+        success: function(result) {
+        }
+    });
+  }
+
+    
+</script>

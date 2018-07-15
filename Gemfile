@@ -23,6 +23,9 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 
+gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
+gem 'rails-ujs', '~> 0.1.0'
+gem "chartkick"
 
 #Pg is the Ruby interface to the {PostgreSQL RDBMS}[
 gem 'pg', '~> 1.0'
