@@ -45,8 +45,7 @@ class ChatService
   end
 
   def send_favorite_tracks
-    user = User.first
-    favorite_tracks = user.favorite_tracks
+    favorite_tracks = @current_user.favorite_tracks
     favorite_tracks.empty? ? send_empty_list_message(FAVORITE_EMPTY_LIST) : send_list(favorite_tracks, DISLIKE_MUSIC_TITLE)
   end
 
