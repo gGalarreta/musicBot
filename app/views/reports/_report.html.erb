@@ -1,5 +1,9 @@
 <div id="report">
   <% if results.present? %>
-    <%= column_chart results %>
+    <% if @report.is_for_songs %>
+      <%= render 'table', results: results %>
+    <% else %>
+      <%= column_chart results %>
+    <% end %>
   <% end %>
 </div>

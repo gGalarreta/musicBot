@@ -9,7 +9,6 @@ class ReportsController < ApplicationController
     @results = @report.generate(params)
   end
 
-
   private
 
     def set_report

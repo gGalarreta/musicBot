@@ -1,5 +1,7 @@
 class Report
 
+  attr_accessor :type
+
   MONTHS = ["january","february","march","april","may","june","july","august","september","october","november","december"]
   USER_OPTION = "usuarios"
   CHAT_OPTION = "chats"
@@ -7,6 +9,7 @@ class Report
   SEARCH_OPTION = "canciones populares por busquedas"
 
   def initialize()
+    @type = ""
   end
 
 
@@ -23,6 +26,7 @@ class Report
     report_type = args[:report_type]
     start_report_frequency = args[:start_report_frequency]
     finalt_report_frequency = args[:final_report_frequency]
+    @type = report_type
     if valid_params?(report_type, start_report_frequency)
       case report_type
       when USER_OPTION
@@ -37,6 +41,9 @@ class Report
     end
   end
 
+  def is_for_songs
+    @type == SEARCH_OPTION
+  end
 
   private 
 
@@ -64,6 +71,7 @@ class Report
       end
       values
     end
+
 
 
 

@@ -1,0 +1,18 @@
+<div class="table">
+  <table id="search-tracks-table">
+    <thead>
+      <tr>
+        <th>Cancion</th>
+        <th>Frecuencia</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% results.each do |result| %>
+        <tr>
+          <td><%= result.first %></td>
+          <td><%= result.second %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

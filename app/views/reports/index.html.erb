@@ -42,7 +42,7 @@
     var final_frequency_element = document.getElementById("final_month");
     var final_report_frequency = final_frequency_element.options[final_frequency_element.selectedIndex].value;
 
-    if (report_type === "<%= Report::SONG_OPTION %>"){
+    if (report_type === "<%= Report::SONG_OPTION %>" || report_type ==="<%= Report::SEARCH_OPTION %>"){
         document.getElementById("months-options").style.display="none";
     } else{
         document.getElementById("months-options").style.display="";
