@@ -63,7 +63,7 @@ class MessengerController < ApplicationController
     end
 
     def save_conversations current_user, sender, text, payload
-      unless tex
+      unless text
          text = payload["payload"]
        end
       current_user.add_conversation(sender, text, payload)
