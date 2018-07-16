@@ -63,9 +63,7 @@ class MessengerController < ApplicationController
     end
 
     def save_conversations current_user, sender, text, payload
-      unless text
-         text = payload["payload"]
-       end
+      text = text ? text["text"] : payload["payload"]
       current_user.add_conversation(sender, text, payload)
     end
 
