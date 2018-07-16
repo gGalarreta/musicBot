@@ -2,7 +2,11 @@
   <table id="search-tracks-table">
     <thead>
       <tr>
-        <th>Cancion</th>
+        <% if @report.type == Report::SEARCH_OPTION %>
+          <th>Cancion</th>
+        <% else %>
+          <th>Palabra</th>
+        <% end %>
         <th>Frecuencia</th>
       </tr>
     </thead>

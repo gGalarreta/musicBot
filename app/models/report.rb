@@ -7,6 +7,7 @@ class Report
   CHAT_OPTION = "chats"
   SONG_OPTION = "canciones populares por favoritos"
   SEARCH_OPTION = "canciones populares por busquedas"
+  WRITTEN_WORDS_OPTION = "que se escribio"
 
   def initialize()
     @type = ""
@@ -14,7 +15,7 @@ class Report
 
 
   def options
-    [USER_OPTION, CHAT_OPTION, SONG_OPTION, SEARCH_OPTION]
+    [USER_OPTION, CHAT_OPTION, SONG_OPTION, SEARCH_OPTION, WRITTEN_WORDS_OPTION]
   end
 
   def frequencies
@@ -35,6 +36,8 @@ class Report
         @results = generate_report_struct(Conversation.all, start_report_frequency, finalt_report_frequency)
       when SONG_OPTION
         @results = generate_generic_struct(FavoriteTrack.all, "track_name")
+      when WRITTEN_WORDS_OPTION
+        @results = get_words_in_database(Conversation.all, :text)
       else
         @results = generate_generic_struct(SearchedTrack.all, "track_name")
       end
@@ -42,7 +45,7 @@ class Report
   end
 
   def is_for_songs
-    @type == SEARCH_OPTION
+    @type == SEARCH_OPTION || @type == WRITTEN_WORDS_OPTION
   end
 
   private 
@@ -72,7 +75,11 @@ class Report
       values
     end
 
-
+    def get_words_in_database data, label
+      text = data.map(&label).map { |k| "#{k}" }.join(" ")
+      tokens = Phrase.new(text)
+      tokens.word_count.sort {|a1,a2| a2[1]<=>a1[1]}
+    end
 
 
 end
